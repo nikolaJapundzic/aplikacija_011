@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food">
+        <item>Bruscheta</item>
+        <item>Fish and chips</item>
+        <item>Garlic bread</item>
+        <item>Lazy lobster</item>
+        <item>Prime ribs</item>
+        <item>Lobster whole</item>
+    </string-array>
+</resources>
