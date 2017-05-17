@@ -3,7 +3,7 @@ package rs.aleph.android.zadatak3;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import rs.aleph.android.zadatak3.activities.SecondActivity;
+import rs.aleph.android.zadatak3.activities.activities.SecondActivity;
 
 public class SecondActivityTest extends ActivityInstrumentationTestCase2<SecondActivity> {
 

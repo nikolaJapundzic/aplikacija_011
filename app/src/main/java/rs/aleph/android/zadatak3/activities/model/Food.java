@@ -1,4 +1,4 @@
-package rs.aleph.android.zadatak3.activities;
+package rs.aleph.android.zadatak3.activities.model;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,8 @@ public class Food {
         foods = new ArrayList<Food>();
     }
 
-    public Food(String slika, String naziv, String opis, String sastojci, double kalorijskaVrednost, double cena, float rating) {
+    public Food(int id, String slika, String naziv, String opis, String sastojci, double kalorijskaVrednost, double cena, float rating) {
+        this.id = id;
         this.slika = slika;
         this.naziv = naziv;
         this.opis = opis;

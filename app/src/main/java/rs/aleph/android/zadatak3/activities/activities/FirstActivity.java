@@ -1,18 +1,15 @@
-package rs.aleph.android.zadatak3.activities;
+package rs.aleph.android.zadatak3.activities.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;

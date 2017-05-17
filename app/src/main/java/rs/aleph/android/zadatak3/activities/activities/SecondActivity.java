@@ -1,18 +1,14 @@
-package rs.aleph.android.zadatak3.activities;
+package rs.aleph.android.zadatak3.activities.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,12 +16,11 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import rs.aleph.android.zadatak3.R;
+import rs.aleph.android.zadatak3.activities.model.Food;
+import rs.aleph.android.zadatak3.activities.provider.JeloInfoProvider;
 import rs.aleph.android.zadatak3.activities.provider.KategorijaProvider;
 
 // Each activity extends Activity class
@@ -33,16 +28,6 @@ public class SecondActivity extends AppCompatActivity {
 
     Button btn_buy;
     private int position = 0;
-
-
-    private Food[]foods = new Food[]{
-            new Food("bruscheta.jpg", "Bruscheta", "Delicious first class tomato on garlic bread","Bread, salt, frensh fries, onion on top + tomato", 3000.0, 10.0, 4.0f),
-            new Food("fishandchips.jpg", "Fish and chips", "Delicious first class fish with tartar","Fish, salt, frensh fries, tartar, ketchup", 1000.0, 15.0, 4.0f),
-            new Food("garlicbread.jpg", "Garlic bread", "Delicious first class snack","Bread, salt, frensh fries, onion on top", 2800.0, 9.0, 4.0f),
-            new Food("lazylobster.jpg", "Lazy lobster", "Delicious first class meat from best lobster","Lobster-prepared, salt, baked potato, butter, lemon", 2090.0, 31.0, 4.0f),
-            new Food("primeribs.jpg", "Prime ribs", "Delicious first class ribs with frensh fries","Ribs, salt, frensh fries, 1000 island dresses", 2600.0, 22.0, 4.0f),
-            new Food("wholelobster.jpg", "Lobster whole", "Top meni","Lobster, salt, baked potato, butter, lemon", 2000.0, 35.0, 1.5f)
-    };
 
 
 
@@ -68,7 +53,7 @@ public class SecondActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast toast = Toast.makeText(getBaseContext(), "Your order coming in 15 min.", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getBaseContext(), getString(R.string.dilevery), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
@@ -87,31 +72,31 @@ public class SecondActivity extends AppCompatActivity {
         final int position = getIntent().getIntExtra("position", 0);
 
         TextView tvName = (TextView) findViewById(R.id.tv_name);
-        tvName.setText("Name: " +foods[position].getNaziv());
+        tvName.setText(getString(R.string.Name) + " " + JeloInfoProvider.getFoodPoIDju(position).getNaziv());
 
         TextView tvDescription = (TextView) findViewById(R.id.tv_description);
-        tvDescription.setText("Descripion: " +foods[position].getOpis());
+        tvDescription.setText(getString(R.string.Description)+ " " + JeloInfoProvider.getFoodPoIDju(position).getOpis());
 
         TextView tvMoney = (TextView) findViewById(R.id.tv_money);
-        String price = String.valueOf(foods[position].getCena());
+        String price = String.valueOf(JeloInfoProvider.getFoodPoIDju(position).getCena());
         tvMoney.setText("$ "+price);
 
 
 
         TextView tvComponents = (TextView) findViewById(R.id.tv_Components);
-        tvComponents.setText("Components: " +foods[position].getSastojci());
+        tvComponents.setText(getString(R.string.Components)+ " " +JeloInfoProvider.getFoodPoIDju(position).getSastojci());
 
-        String kalorije = String.valueOf(foods[position].getKalorijskaVrednost());
+        String kalorije = String.valueOf(JeloInfoProvider.getFoodPoIDju(position).getKalorijskaVrednost());
         TextView tvCalories = (TextView) findViewById(R.id.tv_Calories);
-        tvCalories.setText("Calories: " +kalorije + " [cal]");
+        tvCalories.setText(getString(R.string.Calories)+ " " +kalorije + " [cal]");
 
         RatingBar rbRating = (RatingBar) findViewById(R.id.rb_rating);
-        rbRating.setRating(foods[position].getRating());
+        rbRating.setRating(JeloInfoProvider.getFoodPoIDju(position).getRating());
 
         ImageView ivImage = (ImageView) findViewById(R.id.iv_image);
         InputStream is = null;
         try{
-            is = getAssets().open(foods[position].getSlika());
+            is = getAssets().open(JeloInfoProvider.getFoodPoIDju(position).getSlika());
             Drawable drawable = Drawable.createFromStream(is, null);
             ivImage.setImageDrawable(drawable);
         }catch(IOException e){

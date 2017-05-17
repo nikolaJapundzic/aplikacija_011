@@ -1,4 +1,4 @@
-package rs.aleph.android.zadatak3.activities;
+package rs.aleph.android.zadatak3.activities.model;
 
 /**
  * Created by Nikola on 5/8/2017.

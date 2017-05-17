@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Activities</string>
+    <string name="app_name">Restaurant</string>
     <string name="kamera_2">Replace with real photo</string>
     <string name="open_browser">Open Web Browser</string>
     <string name="start_activity">Start Second Activity</string>
@@ -13,4 +13,5 @@
     <string name="Calories">Calories:</string>
     <string name="button_buy">Order</string>
     <string name="vegan">vegan</string>
+    <string name="dilevery">Your delivery coming in 15 min.</string>
 </resources>

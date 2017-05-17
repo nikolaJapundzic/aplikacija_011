@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ресторан</string>
-    <string name="camera">Камера 1</string>
     <string name="kamera_2">Постави нову фотографију</string>
-    <string name="open_browser">Отвори интернет претраживач</string>
-    <string name="Price">Цена:</string>
+    <string name="Price">Цена: </string>
     <string name="Description">Опис:</string>
-    <string name="Name">Назив:</string>
-    <string name="Category">Категорија:</string>
-    <string name="Components">Компоненте:</string>
-    <string name="Calories">Калорије:</string>
+    <string name="Name">Назив: </string>
+    <string name="money">Новац: </string>
+    <string name="Category">Категорија: </string>
+    <string name="Components">Компоненте: </string>
+    <string name="Calories">Калорије: </string>
     <string name="button_buy">Поручи</string>
     <string name="vegan">Веган</string>
+    <string name="dilevery">Ваша достава стиже за 15 мин.</string>
 </resources>

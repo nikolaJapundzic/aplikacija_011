@@ -1,18 +1,15 @@
 package rs.aleph.android.zadatak3.activities.provider;
 
-import android.content.Context;
-import android.content.res.Resources;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-import rs.aleph.android.zadatak3.R;
-import rs.aleph.android.zadatak3.activities.Kategorija;
+import rs.aleph.android.zadatak3.activities.model.Kategorija;
 
 /**
  * Created by Nikola on 5/10/2017.
  */
+
 
 public class KategorijaProvider {
     public static List<Kategorija>getKategorije(){
@@ -25,7 +22,10 @@ public class KategorijaProvider {
     }
    // String vegan = Resources.getSystem().getString(R.string.vegan);
     public static List<String> getKategorijaImena(){
-        //String vegan = Resources.getSystem().getString(R.string.vegan);
+
+
+        //String veganS = context.getResources().getString(R.string.vegan);
+        //String vegan = getString(R.string.vegan);
 
         List<String> names = new ArrayList<>();
         names.add("Vegan");
