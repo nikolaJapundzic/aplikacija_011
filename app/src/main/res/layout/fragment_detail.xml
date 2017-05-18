@@ -84,7 +84,7 @@
             android:text="@string/button_buy"
             android:layout_gravity="end"
             android:background="@animator/round_button"
-            android:drawableStart="@drawable/ic_action_name"/>
+            android:drawableLeft="@drawable/ic_action_name"/>
 
 
     </LinearLayout>

@@ -29,7 +29,6 @@ public class JeloInfoProvider {
         names.add("Lazy lobster");
         names.add("Prime ribs");
         names.add("Lobster whole");
-        names.add("Lobster whole");
         return names;
     }
 

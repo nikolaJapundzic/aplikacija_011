@@ -1,27 +1,18 @@
 package rs.aleph.android.zadatak3.activities.activities;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-
-import java.io.IOException;
-import java.io.InputStream;
+import android.widget.Toast;
 
 import rs.aleph.android.zadatak3.R;
+import rs.aleph.android.zadatak3.activities.fragments.DetailFragment;
+import rs.aleph.android.zadatak3.activities.fragments.MasterFragment;
 
 // Each activity extends Activity class
-public class FirstActivity extends Activity {
+public class FirstActivity extends Activity implements MasterFragment.OnItemSelectedListener {
 
-    public static String getsVegan(){
-        return Resources.getSystem().getString(R.string.vegan);
-    }
+    boolean landscape = false;
 
 
 	// onCreate method is a lifecycle method called when he activity is starting
@@ -33,42 +24,62 @@ public class FirstActivity extends Activity {
 		// Each lifecycle method should call the method it overrides
 		super.onCreate(savedInstanceState);
 		// setContentView method draws UI
-		setContentView(R.layout.activity_main);
+        // Draws layout
+        setContentView(R.layout.activity_first);
+
+        // If the activity is started for the first time create master fragment
+        if (savedInstanceState == null) {
+            // FragmentTransaction is a set of changes (e.g. adding, removing and replacing fragments) that you want to perform at the same time.
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            MasterFragment masterFragment = new MasterFragment();
+            ft.add(R.id.master_view, masterFragment, "Master_Fragment_1");
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
+        }
+
+        // If the device is in the landscape mode and the detail fragment is null create detail fragment
+        if (findViewById(R.id.detail_view) != null) {
+            landscape = true;
+            getFragmentManager().popBackStack();
+
+            DetailFragment detailFragment = (DetailFragment) getFragmentManager().findFragmentById(R.id.detail_view);
+            if (detailFragment == null) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                detailFragment = new DetailFragment();
+                ft.replace(R.id.detail_view, detailFragment, "Detail_Fragment_1");
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+            }
+        }
+    }
 
 
-        ImageView ivImage = (ImageView) findViewById(R.id.iv_1);
-        InputStream is = null;
-        try{
-            is = getAssets().open("img_rest.png");
-            Drawable drawable = Drawable.createFromStream(is, null);
-            ivImage.setImageDrawable(drawable);
-        }catch(IOException e){
-            e.printStackTrace();
+        //--------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------
+        @Override
+        public void onItemSelected(int position) {
+
+
+            if (landscape) {
+                // If the device is in the landscape mode updates detail fragment's content.
+                DetailFragment detailFragment = (DetailFragment) getFragmentManager().findFragmentById(R.id.detail_view);
+                detailFragment.updateContent(position);
+            } else {
+                // If the device is in the portrait mode sets detail fragment's content and replaces master fragment with detail fragment in a fragment transaction.
+                DetailFragment detailFragment = new DetailFragment();
+                detailFragment.setContent(position);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.master_view, detailFragment, "Detail_Fragment_2");
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
         }
 
 
-        //--------------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------
-        final String[]foods = getResources().getStringArray(R.array.food);
 
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.list_item, foods);
-        ListView listView = (ListView) findViewById(R.id.listoffoods);
-
-        listView.setAdapter(dataAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
-                intent.putExtra("position", position);
-                startActivity(intent);
-            }
-        });
-
-
-
-    }
     //--------------------------------------------------------------------------------------
     //--------------------------------------------------------------------------------------
     //--------------------------------------------------------------------------------------
